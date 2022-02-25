@@ -1,0 +1,12 @@
+{
+  "prompt":"2 * 4 =",
+  "temperature":0.5,
+  "topP":1,
+  "frequencyPenalty":0,
+  "presencePenalty":0,
+  "maxTokens":30,
+  "stopSymbols":[
+    "\n"
+  ],
+  "modelName":"code-davinci-001"
+}
