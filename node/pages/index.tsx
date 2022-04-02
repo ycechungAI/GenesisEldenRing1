@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [wordInput, setwordInput] = useState("");
+  const [wordInput, setwordInput] = useState<string>("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
