@@ -6,11 +6,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  const completion = await openai.createCompletion("code-cushman-001", {
+  const completion = await openai.createCompletion("code-davinci-001", {
     prompt: generatePrompt(req.body.word),
     temperature: 0.5,
     top_p: 1,
-    stop: "\n\n",
+    stop: "\n",
   });
   res.status(200).json({ result: completion.data.choices[0].text });
 }
@@ -23,16 +23,22 @@ function generatePrompt(word) {
 
   word_list: "enemy", "weak foe", "strong foe", "monster", "dragon", "boss", "sentry", "group", "pack", "decoy", "undead", "soldier", "knight", "item", "precious item",   "cavalier", "archer", "sniper", "mage", "ordnance", "monarch", "lord", "demi-human", "outsider", "giant", "horse", "dog", "wolf", "rat", "beast", "bird", "raptor", "snake", "crab", "prawn", "octopus", "bug", "scarab", "slug", "wraith", "skeleton", "monstrosity", "ill-omened creature", "item", "necessary item","precious item", "something", "something incredible",
   "treasure chest", "corpse","coffin","trap", "armament"
-  '''
+  
   Input: Watch out for the great enemy creature.
+  '''
   Output: Be wary of strong foe.
+  
   '''
   Input: There is a boss monster that drops a special item in the next room.
+  '''
   Output: Boss ahead and precious item ahead.
+  
   '''
   Input: There is an item in front and there is no one ahead
+  '''
   Output: Item ahead and no boss ahead.
-  '''''
+  '''
   Input: ${capitalizedword}
+  ''''
   Output: `;
 }
