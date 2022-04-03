@@ -6,11 +6,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  const completion = await openai.createCompletion("code-davinci-001", {
+  const completion = await openai.createCompletion("text-babbage-001", {
     prompt: generatePrompt(req.body.word),
-    temperature: 0.5,
-    top_p: 1,
-    stop: "\n",
+    max_tokens: 40,
+    temperature: 0,
   });
   res.status(200).json({ result: completion.data.choices[0].text });
 }
