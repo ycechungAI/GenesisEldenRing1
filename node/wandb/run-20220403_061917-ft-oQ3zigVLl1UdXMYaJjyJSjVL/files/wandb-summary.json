@@ -1,0 +1,1 @@
+{"elapsed_tokens": 1461.0, "elapsed_examples": 69.0, "training_loss": 1.3231200367212297, "training_sequence_accuracy": 0.0, "training_token_accuracy": 0.5, "_timestamp": 1648981159, "_runtime": 2, "_step": 69, "fine_tuned_model": "babbage:ft-personal:eugenics-001-2022-04-03-09-54-56", "status": "succeeded", "_wandb": {"runtime": 6}}
