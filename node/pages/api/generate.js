@@ -7,7 +7,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  const response = await openai.createEdit("text-davinci-edit-001", {
+  const response = await openai.createFile(
+    fs.createReadStream("data.jsonl"),
+    "input"
+  );
+  const response2 = await openai.createEdit("text-davinci-edit-001", {
     input: generatePrompt(req.body.word),
     instruction: "Replace Input by using the closest matching template array below\n  template: [\"**** ahead\", \"No **** ahead\", \"**** required ahead\", \"Be wary of ****\", \"Try ****\", \"Likely ****\", \"Seek ****\", \"Still no ****...\",  \"Why is it always ****?\", \"If only I had a ****...\", \"Didn't expect ****...\", \"Visions of ****...\", \"Could this be a ****?\", \"Time for ****\", \"****, O ****\", \"Behold, ****!\", \"Offer ****\", \"Praise the ****!\", \"Let there be ****\", \"Ahh, ****..\"]",
     temperature: 0.21,
