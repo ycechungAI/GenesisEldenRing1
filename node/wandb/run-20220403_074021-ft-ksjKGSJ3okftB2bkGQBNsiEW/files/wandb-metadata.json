@@ -1,0 +1,26 @@
+{
+    "os": "Windows-10-10.0.22581-SP0",
+    "python": "3.9.7",
+    "heartbeatAt": "2022-04-03T11:40:22.220311",
+    "startedAt": "2022-04-03T11:40:21.210366",
+    "docker": null,
+    "cpu_count": 12,
+    "cuda": null,
+    "args": [
+        "-k",
+        "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",
+        "wandb",
+        "sync"
+    ],
+    "state": "running",
+    "program": "-m __main__",
+    "git": {
+        "remote": "https://github.com/ycechungAI/GenesisEldenRing1.git",
+        "commit": "72f12e900ffe6b3355d4ee718c8770ebae79cdba"
+    },
+    "email": "ycechung@myseneca.ca",
+    "root": "C:/Users/ycech/Documents/Github/GenesisEldenRing1/GenesisEldenRing1",
+    "host": "ycechung-BIGAI",
+    "username": "ycech",
+    "executable": "C:\\Users\\ycech\\miniconda3\\python.exe"
+}

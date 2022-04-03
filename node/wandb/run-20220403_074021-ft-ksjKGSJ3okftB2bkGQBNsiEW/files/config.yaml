@@ -1,0 +1,80 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.11
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.9.7
+    start_time: 1648986021
+    t:
+      3:
+      - 2
+      - 13
+      - 14
+      - 16
+      4: 3.9.7
+      5: 0.12.11
+      8:
+      - 3
+      - 5
+created_at:
+  desc: null
+  value: '2022-04-03T07:30:55'
+fine_tuned_model:
+  desc: null
+  value: davinci:ft-personal:eugenics-002-2022-04-03-11-34-12
+hyperparams:
+  desc: null
+  value:
+    batch_size: 1
+    learning_rate_multiplier: 0.05
+    n_epochs: 4
+    prompt_loss_weight: 0.1
+id:
+  desc: null
+  value: ft-ksjKGSJ3okftB2bkGQBNsiEW
+model:
+  desc: null
+  value: davinci
+n_train:
+  desc: null
+  value: 17
+object:
+  desc: null
+  value: fine-tune
+organization_id:
+  desc: null
+  value: org-Q1zQjUFbaRekSJPJKRcyo2SC
+result_files:
+  desc: null
+  value:
+    bytes: 3265
+    created_at: 1648985655
+    filename: compiled_results.csv
+    id: file-NIQw2AH1kRstHTfdSFtEuwqW
+    object: file
+    purpose: fine-tune-results
+    status: processed
+    status_details: null
+status:
+  desc: null
+  value: succeeded
+training_files:
+  desc: null
+  value:
+    bytes: 1866
+    created_at: 1648985454
+    filename: data_prepared.jsonl
+    id: file-Ng9Qybr7pqaOTA7hIbj8ITXF
+    object: file
+    purpose: fine-tune
+    status: processed
+    status_details: null
+updated_at:
+  desc: null
+  value: 1648985658
+validation_files:
+  desc: null
+  value: []

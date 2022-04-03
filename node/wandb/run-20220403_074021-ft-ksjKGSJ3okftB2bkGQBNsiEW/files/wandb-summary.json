@@ -1,0 +1,1 @@
+{"elapsed_tokens": 1486.0, "elapsed_examples": 70.0, "training_loss": 2.369882339052856, "training_sequence_accuracy": 0.0, "training_token_accuracy": 0.2, "_timestamp": 1648986023, "_runtime": 2, "_step": 70, "fine_tuned_model": "davinci:ft-personal:eugenics-002-2022-04-03-11-34-12", "status": "succeeded", "_wandb": {"runtime": 6}}
