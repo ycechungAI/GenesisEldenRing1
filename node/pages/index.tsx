@@ -1,12 +1,15 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState, Component } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
   const [wordInput, setwordInput] = useState<string>("");
   const [result, setResult] = useState();
+  const numRows = 3;
+  const numCols = 50;
 
-  async function onSubmit(event) {
+
+  async function onSubmit(event: { preventDefault: () => void; }): Promise<void> {
     event.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -32,12 +35,11 @@ export default function Home() {
         <h3>Dark Souls Message</h3>
         <form onSubmit={onSubmit}>
           <textarea
-            type="text"
             name="word"
             placeholder="Enter a phrase"
             value={wordInput} onChange={(e) => setwordInput(e.target.value)} 
-            rows="3"
-            cols="50"
+            rows={numRows}
+            cols={numCols}
           />
           <input type="submit" value="Generate message" />
         </form>
