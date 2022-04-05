@@ -1,12 +1,20 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState, Component } from "react";
 import styles from "./index.module.css";
-
+const numRow = 3;
+const numCol = 50;
 export default function Home() {
   const [wordInput, setwordInput] = useState<string>("");
   const [result, setResult] = useState();
 
-  async function onSubmit(event) {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.currentTarget.body.word.value);
+    onSubmit(e.currentTarget.body.word.value);
+  }
+
+
+  async function onSubmit(event : React.FormEvent< HTMLFormElement >): Promise<void> {
     event.preventDefault();
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -30,16 +38,15 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
         <h3>Dark Souls Message</h3>
-        <form onSubmit={onSubmit}>
-          <textarea
+        <form onSubmit={handleFormSubmit}>
+          <input
             type="text"
+            className={styles.textarea}
+            value={wordInput}
             name="word"
-            placeholder="Enter a phrase"
-            value={wordInput} onChange={(e) => setwordInput(e.target.value)} 
-            rows="3"
-            cols="50"
+            placeholder="Enter a phrase."
           />
-          <input type="submit" value="Generate message" />
+          <button type="submit">Generate Message</button>
         </form>
         <div className={styles.result}>{result}</div>
       </main>
