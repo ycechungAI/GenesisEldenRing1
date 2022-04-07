@@ -1,13 +1,16 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
   const [wordInput, setwordInput] = useState<string>("");
-  const [result, setResult] = useState();
+  const [error, setError] = useState<string>("");
+  const [result, setResult] = useState<string>();
 
-  async function onSubmit(event) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setResult("");
+    setError("");
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -15,9 +18,15 @@ export default function Home() {
       },
       body: JSON.stringify({ word: wordInput }),
     });
-    const data = await response.json();
-    setResult(data.result);
-    setwordInput("");
+    const status = response.status;
+    if (status === 200) {
+      const data = await response.json();
+      setResult(data.result);
+      setwordInput("");
+    } else {
+      const data = await response.json();
+      setError(data.error);
+    }
   }
 
   return (
@@ -42,6 +51,7 @@ export default function Home() {
           <input type="submit" value="Generate message" />
         </form>
         <div className={styles.result}>{result}</div>
+        { error }
       </main>
     </div>
   );
