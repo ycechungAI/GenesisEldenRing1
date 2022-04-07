@@ -1,21 +1,48 @@
 import { Configuration, OpenAIApi } from "openai";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 
-export default async function (req, res) {
+function createOpenAIApi() {
+  let configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  console.log("key:" + JSON.stringify(process.env, null, 4));
+  console.log("conf:" + JSON.stringify(configuration));
+  if (configuration.apiKey === undefined) {
+    return null;
+  }
+  return new OpenAIApi(configuration);
+}
+const openai = createOpenAIApi();
+
+export default async function (req: NextApiRequest, res: NextApiResponse) {
+  if (openai === null) {
+      res.status(500).json({ error: "OpenAI API could not be configured." })
+      return;
+  }
+
+  if (!req.body.word || req.body.word.length === 0) {
+    res.status(400).json({ error: "Message cannot be empty." })
+    return;
+  }
+
   const completion = await openai.createCompletion("code-cushman-001", {
     prompt: generatePrompt(req.body.word),
     temperature: 0.5,
     top_p: 1,
     stop: "\n\n",
   });
-  res.status(200).json({ result: completion.data.choices[0].text });
+
+  let choices = completion.data.choices;
+  if (choices === undefined || choices.length === 0 || choices[0].text === undefined) {
+    res.status(500).json({ error: "OpenAI did not return a choice." });
+    return;
+  }
+
+  res.status(200).json({ result: choices[0].text });
 }
 
-function generatePrompt(word) {
+function generatePrompt(word: string) {
   const capitalizedword =
     word[0].toUpperCase() + word.slice(1).toLowerCase();
   return `'''Use input message and translate using template from the list below and replace the **** with a word from the list below only.
