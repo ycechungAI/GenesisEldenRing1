@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 export default function Home() {
   const [wordInput, setwordInput] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [result, setResult] = useState<string>();
+  const [result, setResult] = useState<string>("");
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,12 +41,11 @@ export default function Home() {
         <h3>Dark Souls Message</h3>
         <form onSubmit={onSubmit}>
           <textarea
-            type="text"
             name="word"
             placeholder="Enter a phrase"
             value={wordInput} onChange={(e) => setwordInput(e.target.value)} 
-            rows="3"
-            cols="50"
+            rows={3}
+            cols={50}
           />
           <input type="submit" value="Generate message" />
         </form>
