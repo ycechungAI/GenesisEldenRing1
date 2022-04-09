@@ -1,13 +1,11 @@
 import { Configuration, OpenAIApi } from "openai";
 import { NextApiRequest, NextApiResponse } from "next";
-
+import { TEMPLATES } from "pages/api/Linguistics";
 
 function createOpenAIApi() {
   let configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
-  console.log("key:" + JSON.stringify(process.env, null, 4));
-  console.log("conf:" + JSON.stringify(configuration));
   if (configuration.apiKey === undefined) {
     return null;
   }
