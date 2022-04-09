@@ -387,6 +387,38 @@ export const WORDS: {[name: string]: string[]} = {
     "fear",
     "sacrifice",
     "ruin"
+  ],
+  "Phrases": [
+    "good luck",
+    "look carefully",
+    "listen carefully",
+    "think carefully",
+    "well done",
+    "I did it!",
+    "I've failed...",
+    "here!",
+    "not here!",
+    "don't you dare!", //
+    "do it!",
+    "I can't take this...",
+    "don't think",
+    "so lonely...",
+    "here again...",
+    "just getting started",
+    "stay calm",
+    "keep moving",
+    "turn back", //
+    "give up",
+    "don't gie up",
+    "help me...",
+    "I don't believe it...",
+    "too high up",
+    "I want to go home...",
+    "it's like a dream...",
+    "seems familiar...",
+    "beautiful...", //
+    "you don't have the right",
+    "are you ready?"
   ]
 };
 
