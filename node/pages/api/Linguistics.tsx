@@ -26,8 +26,8 @@ export const TEMPLATES = [
   "****..."
 ];
 
-export const WORDS: {[name: string]: string[]} = {
-  "Enemies": [
+export const WORDS: { [name: string]: string[] } = {
+  Enemies: [
     "enemy",
     "weak foe",
     "strong foe",
@@ -68,9 +68,9 @@ export const WORDS: {[name: string]: string[]} = {
     "wraith",
     "skeleton",
     "monstrosity",
-    "ill-omened creature"
+    "ill-omened creature",
   ],
-  "People": [
+  People: [
     "Tarnished",
     "warrior",
     "swordfighter",
@@ -114,9 +114,9 @@ export const WORDS: {[name: string]: string[]} = {
     "champion",
     "monarch",
     "lord",
-    "god"
+    "god",
   ],
-  "Things": [
+  Things: [
     "item",
     "necessary item",
     "precious item",
@@ -161,7 +161,7 @@ export const WORDS: {[name: string]: string[]} = {
     "message",
     "bloodstain",
     "Erdtree",
-    "Elden Ring"
+    "Elden Ring",
   ],
   "Battle Tactics": [
     "close-quarters battle",
@@ -173,16 +173,16 @@ export const WORDS: {[name: string]: string[]} = {
     "rushing in",
     "stealth",
     "mimicry",
-    "confusion" //
+    "confusion",
     "pursuit",
     "fleeing",
     "summoning",
     "circling around",
     "jumping off",
     "dashing through",
-    "brief respite"
-  ]
-  "Actions": [
+    "brief respite",
+  ],
+  Actions: [
     "attacking",
     "jump attack",
     "running attack",
@@ -204,9 +204,9 @@ export const WORDS: {[name: string]: string[]} = {
     "crouching", //
     "target lock",
     "item crafting",
-    "gesturing"
+    "gesturing",
   ],
-  "Situations": [
+  Situations: [
     "morning",
     "noon",
     "evening",
@@ -249,9 +249,9 @@ export const WORDS: {[name: string]: string[]} = {
     "dead end",
     "looking away",
     "unnoticed",
-    "out of stamina"
+    "out of stamina",
   ],
-  "Places": [
+  Places: [
     "high road",
     "checkpoint",
     "bridge",
@@ -281,9 +281,9 @@ export const WORDS: {[name: string]: string[]} = {
     "cliff",
     "waterside", //
     "nest",
-    "hole"
+    "hole",
   ],
-  "Directions": [
+  Directions: [
     "east",
     "west",
     "south",
@@ -295,7 +295,7 @@ export const WORDS: {[name: string]: string[]} = {
     "center",
     "up", //
     "down",
-    "edge"
+    "edge",
   ],
   "Body Parts": [
     "head",
@@ -306,9 +306,9 @@ export const WORDS: {[name: string]: string[]} = {
     "rump",
     "tail",
     "core",
-    "fingers"
+    "fingers",
   ],
-  "Afinities": [
+  Afinities: [
     "physical",
     "standard",
     "striking",
@@ -325,9 +325,9 @@ export const WORDS: {[name: string]: string[]} = {
     "frost",
     "sleep",
     "madness",
-    "death"
+    "death",
   ],
-  "Concepts": [
+  Concepts: [
     "life",
     "Death",
     "light",
@@ -386,9 +386,9 @@ export const WORDS: {[name: string]: string[]} = {
     "dregs",
     "fear",
     "sacrifice",
-    "ruin"
+    "ruin",
   ],
-  "Phrases": [
+  Phrases: [
     "good luck",
     "look carefully",
     "listen carefully",
@@ -418,8 +418,8 @@ export const WORDS: {[name: string]: string[]} = {
     "seems familiar...",
     "beautiful...", //
     "you don't have the right",
-    "are you ready?"
-  ]
+    "are you ready?",
+  ],
 };
 
 export const CONJUNCTIONS = [
