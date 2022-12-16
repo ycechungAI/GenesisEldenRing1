@@ -38,19 +38,20 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Dark Souls Message</h3>
+        <h3>Elden Ring Message</h3>
         <form onSubmit={onSubmit}>
           <textarea
             name="word"
             placeholder="Enter a phrase"
-            value={wordInput} onChange={(e) => setwordInput(e.target.value)} 
+            value={wordInput}
+            onChange={(e) => setwordInput(e.target.value)}
             rows={3}
             cols={50}
           />
           <input type="submit" value="Generate message" />
         </form>
         <div className={styles.result}>{result}</div>
-        { error }
+        {error}
       </main>
     </div>
   );

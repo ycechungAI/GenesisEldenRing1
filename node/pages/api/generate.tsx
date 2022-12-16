@@ -15,24 +15,54 @@ const openai = createOpenAIApi();
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (openai === null) {
-      res.status(500).json({ error: "OpenAI API could not be configured." })
-      return;
-  }
-
-  if (!req.body.word || req.body.word.length === 0) {
-    res.status(400).json({ error: "Message cannot be empty." })
+    res.status(500).json({ error: "OpenAI API could not be configured." });
     return;
   }
 
-  const completion = await openai.createCompletion("code-cushman-001", {
-    prompt: generatePrompt(req.body.word),
+  if (!req.body.word || req.body.word.length === 0) {
+    res.status(400).json({ error: "Message cannot be empty." });
+    return;
+  }
+
+  const tempcompletion = await openai.createEdit("text-davinci-edit-001", {
+    input: generatePromptTranslate(req.body.word),
+    instruction:
+      "translate to english if in Japanese/Korean/French/German/Hebrew/Arabic/Chinese and then rewrite in souls like style writing",
     temperature: 0.5,
     top_p: 1,
-    stop: ["\n\n", "Input:", '""'],
+  });
+  let choices2 = tempcompletion.data.choices;
+  if (
+    choices2 === undefined ||
+    choices2.length === 0 ||
+    choices2[0].text === undefined
+  ) {
+    res.status(500).json({ error: "OpenAI did not return a choice." });
+    return;
+  } else {
+    res.status(200).json({ result: choices2[0].text });
+  }
+
+  const completion = await openai.createCompletion("code-currie-001", {
+    prompt: generatePrompt(choices2[0].text),
+    temperature: 0.7,
+    max_tokens: 500,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    stop: ["###"],
   });
 
   let choices = completion.data.choices;
-  if (choices === undefined || choices.length === 0 || choices[0].text === undefined) {
+
+  if (
+    choices2 === undefined ||
+    choices2.length === 0 ||
+    choices2[0].text === undefined ||
+    choices === undefined ||
+    choices.length === 0 ||
+    choices[0].text === undefined
+  ) {
     res.status(500).json({ error: "OpenAI did not return a choice." });
     return;
   }
@@ -40,6 +70,10 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json({ result: choices[0].text });
 }
 
+function generatePromptTranslate(word: string) {
+  const capitalizedword = word[0].toUpperCase() + word.slice(1).toLowerCase();
+  return `${capitalizedword}`;
+}
 function generatePrompt(word: string) {
   const capitalizedword =
     word[0].toUpperCase() + word.slice(1).toLowerCase();
