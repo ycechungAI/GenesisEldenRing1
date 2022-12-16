@@ -28,7 +28,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     prompt: generatePrompt(req.body.word),
     temperature: 0.5,
     top_p: 1,
-    stop: "\n\n",
+    stop: ["\n\n", "Input:", '""'],
   });
 
   let choices = completion.data.choices;
