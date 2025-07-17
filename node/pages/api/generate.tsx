@@ -27,9 +27,9 @@ async function callGemini(word: string) {
 }
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-  const useGemini = process.env.USE_GEMINI === "true";
+  const apiProvider = process.env.API_PROVIDER;
 
-  if (useGemini && !process.env.GEMINI_API_KEY) {
+  if (apiProvider === "gemini" && !process.env.GEMINI_API_KEY) {
     res.status(500).json({
       error: {
         message: "Gemini API key not configured.",
@@ -38,7 +38,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (!useGemini && !openai.apiKey) {
+  if (apiProvider === "openai" && !openai.apiKey) {
     res.status(500).json({
       error: {
         message: "OpenAI API key not configured.",
@@ -58,7 +58,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const result = useGemini ? await callGemini(word) : await callOpenAI(word);
+    const result =
+      apiProvider === "gemini" ? await callGemini(word) : await callOpenAI(word);
     res.status(200).json({ result });
   } catch (error: any) {
     // Consider adjusting the error handling logic for your use case

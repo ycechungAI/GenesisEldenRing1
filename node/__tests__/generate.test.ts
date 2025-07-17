@@ -4,7 +4,7 @@ import handle from '../pages/api/generate';
 describe('/api/generate', () => {
   describe('when using OpenAI', () => {
     beforeEach(() => {
-      process.env.USE_GEMINI = 'false';
+      process.env.API_PROVIDER = 'openai';
     });
 
     test('returns a result when a word is provided', async () => {
@@ -38,7 +38,7 @@ describe('/api/generate', () => {
 
   describe('when using Gemini', () => {
     beforeEach(() => {
-      process.env.USE_GEMINI = 'true';
+      process.env.API_PROVIDER = 'gemini';
     });
 
     test('returns a result when a word is provided', async () => {
