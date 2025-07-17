@@ -24,7 +24,7 @@ async function callGemini(word: string) {
     model: "gemini-1.5-flash",
     contents: generatePrompt(word),
   });
-  return result.response.text();
+  return result.text;
 }
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
