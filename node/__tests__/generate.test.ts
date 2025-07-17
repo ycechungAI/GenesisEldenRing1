@@ -2,31 +2,71 @@ import { createMocks } from 'node-mocks-http';
 import handle from '../pages/api/generate';
 
 describe('/api/generate', () => {
-  test('returns a result when a word is provided', async () => {
-    const { req, res } = createMocks({
-      method: 'POST',
-      body: {
-        word: 'test',
-      },
+  describe('when using OpenAI', () => {
+    beforeEach(() => {
+      process.env.USE_GEMINI = 'false';
     });
 
-    await handle(req, res);
+    test('returns a result when a word is provided', async () => {
+      const { req, res } = createMocks({
+        method: 'POST',
+        body: {
+          word: 'test',
+        },
+      });
 
-    expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())).toHaveProperty('result');
+      await handle(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toHaveProperty('result');
+    });
+
+    test('returns an error when no word is provided', async () => {
+      const { req, res } = createMocks({
+        method: 'POST',
+        body: {
+          word: '',
+        },
+      });
+
+      await handle(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toHaveProperty('error');
+    });
   });
 
-  test('returns an error when no word is provided', async () => {
-    const { req, res } = createMocks({
-      method: 'POST',
-      body: {
-        word: '',
-      },
+  describe('when using Gemini', () => {
+    beforeEach(() => {
+      process.env.USE_GEMINI = 'true';
     });
 
-    await handle(req, res);
+    test('returns a result when a word is provided', async () => {
+      const { req, res } = createMocks({
+        method: 'POST',
+        body: {
+          word: 'test',
+        },
+      });
 
-    expect(res._getStatusCode()).toBe(400);
-    expect(JSON.parse(res._getData())).toHaveProperty('error');
+      await handle(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toHaveProperty('result');
+    });
+
+    test('returns an error when no word is provided', async () => {
+      const { req, res } = createMocks({
+        method: 'POST',
+        body: {
+          word: '',
+        },
+      });
+
+      await handle(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(JSON.parse(res._getData())).toHaveProperty('error');
+    });
   });
 });
