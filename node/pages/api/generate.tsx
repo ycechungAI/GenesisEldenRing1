@@ -10,7 +10,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 async function callOpenAI(word: string) {
   const completion = await openai.completions.create({
-    model: "text-davinci-003",
+    model: "gpt-4o-mini",
     prompt: generatePrompt(word),
     temperature: 0.5,
     top_p: 1,
@@ -20,7 +20,7 @@ async function callOpenAI(word: string) {
 }
 
 async function callGemini(word: string) {
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const result = await model.generateContent(generatePrompt(word));
   const response = await result.response;
   return response.text();
