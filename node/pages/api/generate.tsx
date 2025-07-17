@@ -1,29 +1,46 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY || ""});
 
 async function callOpenAI(word: string) {
-  const completion = await openai.completions.create({
-    model: "gpt-4o-mini",
-    prompt: generatePrompt(word),
-    temperature: 0.5,
-    top_p: 1,
-    stop: ["\n\n", "Input:", '""'],
-  });
-  return completion.choices[0].text;
+  try {
+    const completion = await openai.completions.create({
+      model: "gpt-4o-mini",
+      prompt: generatePrompt(word),
+      temperature: 0.5,
+      top_p: 1,
+      stop: ["\n\n", "Input:", '""'],
+    });
+    return completion.choices[0].text;
+  } catch (error) {
+    console.error("Error calling OpenAI:", error);
+    throw error;
+  }
 }
 
 async function callGemini(word: string) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const result = await model.generateContent(generatePrompt(word));
-  const response = await result.response;
-  return response.text();
+  try {
+    const model = genAI.models.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: generatePrompt(word) }] }],
+      generationConfig: {
+        temperature: 0.5,
+        topP: 1,
+        stopSequences: ["\n\n", "Input:", '""'],
+      },
+    });
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Error calling Gemini:", error);
+    throw error;
+  }
 }
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
