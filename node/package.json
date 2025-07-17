@@ -9,7 +9,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "next": "^14.2.30",
+    "@google/generative-ai": "^0.24.1",
+    "next": "^13.0.0",
     "openai": "^4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
