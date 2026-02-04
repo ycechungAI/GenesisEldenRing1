@@ -48,7 +48,26 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const word = req.body.word || "";
+  const wordInput = req.body.word;
+  if (wordInput && typeof wordInput !== "string") {
+    res.status(400).json({
+      error: {
+        message: "Input must be a string.",
+      },
+    });
+    return;
+  }
+
+  const word = wordInput || "";
+  if (word.length > 100) {
+    res.status(400).json({
+      error: {
+        message: "Input must not exceed 100 characters.",
+      },
+    });
+    return;
+  }
+
   if (word.trim().length === 0) {
     res.status(400).json({
       error: {
